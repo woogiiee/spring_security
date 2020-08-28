@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 검사 URL -->		<!-- 인증 --> <!-- "auto config = true" 항상 true로 해야한다(로그임 페이지 같은 기본 제공 페이지 활용하려면) --> 
+    								<!-- "use expressions=true"  true를 줄시 각종 함수를 활용할 수 있게 해준다 -->
+    <http auto-config="true" use-expressions="true">
+     	<intercept-url pattern="/login/loginForm" access="permitAll" />
+     	<intercept-url pattern="/" access="permitAll" />
+        <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/**" access="hasAnyRole('USER, ADMIN')" />
+        
+		<form-login login-page="/login/loginForm"
+					default-target-url="/"
+					authentication-failure-url="/login/loginForm?error"
+					username-parameter="id"
+					password-parameter="password"/> <!-- form-login/이걸 적게되면 로그인 페이지를 자동적으로 만들어준다 -->
+					
+       <logout logout-url = "/logout" logout-success-url="/"/>
+       <access-denied-handler error-page="/login/accessDenied"/>
+       <csrf disabled="false"></csrf> <!-- 여기에 csrf를 false로 추가하면 꺼버리는것. -->
+       
+    </http>
+    
+	<!-- provider --> 		<!-- 권한 -->
+	<authentication-manager>
+		<authentication-provider> 
+			<user-service> 
+				<user name="user" password="{noop}user" authorities="ROLE_USER" /> 
+				<user name="admin" password="{noop}admin" authorities="ROLE_USER,ROLE_ADMIN" /> 
+				
+			</user-service> <!-- 이것이 userdetailsservice -->
+		</authentication-provider>
+	</authentication-manager>
+    
+    
+</beans:beans>

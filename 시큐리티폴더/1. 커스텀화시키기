@@ -1,0 +1,5 @@
+### 커스텀 UserDetailsService, UserDetails 활용
+EX) -A라는 클래스 안에 a 함수 -> 확장하는 방법: extends, implements.
+	-함수 overriding
+
+ 
