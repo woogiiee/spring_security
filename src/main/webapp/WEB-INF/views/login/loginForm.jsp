@@ -29,7 +29,7 @@
         <label for="password">비밀번호</label>
         <input type="password" id="password" name="password"/>
     </p>
-    <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
+    <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%><!-- form태그 라이브러리를 적어주게 되면 굳이 안써도 되므로 주석처리 -->
     <button type="submit" class="btn">로그인</button>
 </form:form>
 

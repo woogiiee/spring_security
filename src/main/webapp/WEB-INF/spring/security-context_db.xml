@@ -23,6 +23,7 @@
                 logout-success-url="/" /> 
                 
         <access-denied-handler error-page="/login/accessDenied" />
+        
     </http>    
     
      <beans:bean id="userDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
@@ -41,7 +42,7 @@
     /> -->
     
     <!-- 회원가입? --><!-- 암호화된 비밀번호의 아이디만 로그인 할 수 있게끔 -->
-   <authentication-manager>
+    <authentication-manager>
         <authentication-provider>
         <password-encoder ref="bcryptPasswordEncoder"/>
         <jdbc-user-service 
@@ -51,12 +52,12 @@
             authorities-by-username-query="select username, authority from authorities where username = ?"
         />
         </authentication-provider>
-    </authentication-manager>
+    </authentication-manager> 
 	
 	
 	
 	<!-- 기존에 있는 DB를 이용 --><!-- loginForm2 .jsp이용 -->
-	 <!-- <authentication-manager>
+	<!--  <authentication-manager>
         <authentication-provider>
         <password-encoder ref="customNoOpPasswordEncoder"/>
         <jdbc-user-service 
@@ -66,7 +67,7 @@
             authorities-by-username-query="select ename,case when job='MANAGER' then 'ROLE_ADMIN' else  'ROLE_USER' end authority from emp where ename=?"
         />user정보를 db에서 가져오겠다는 것users-by=이건 인증에 대한 쿼리문   authorities by= 이건 권한에 대한 쿼리문
         </authentication-provider>
-    </authentication-manager> -->
+    </authentication-manager>  -->
     
      
      
